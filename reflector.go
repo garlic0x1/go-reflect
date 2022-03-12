@@ -1,3 +1,5 @@
+// credit to @hakluke for most of this code https://github.com/hakluke/hakrawler
+
 package main
 
 import (
@@ -20,14 +22,6 @@ import (
 	"github.com/gocolly/colly/v2"
 )
 
-var (
-	headers      map[string]string
-	USEPROXY     = false
-	injectionMap []injection
-	seededRand   *rand.Rand = rand.New(
-		rand.NewSource(time.Now().UnixNano()))
-)
-
 type injection struct {
 	Hash         string
 	FormLocation string
@@ -45,8 +39,16 @@ type form struct {
 	Inputs []input
 }
 
-// Thread safe map
-var sm sync.Map
+var (
+	// Thread safe map
+	sm      sync.Map
+	headers map[string]string
+	// record all the form inputs performed se we know where each found hash comes from
+	injectionMap []injection
+	// seed rand for randomString()
+	seededRand *rand.Rand = rand.New(
+		rand.NewSource(time.Now().UnixNano()))
+)
 
 func main() {
 	threads := flag.Int("t", 8, "Number of threads to utilise.")
@@ -62,10 +64,7 @@ func main() {
 
 	if *proxy != "" {
 		os.Setenv("PROXY", *proxy)
-		USEPROXY = true
 		*insecure = true
-		proxyURL, _ := url.Parse(os.Getenv("PROXY"))
-		log.Println("Using proxy", proxyURL)
 	}
 	proxyURL, _ := url.Parse(os.Getenv("PROXY"))
 
@@ -189,7 +188,7 @@ func main() {
 				})
 
 				// set up proxy
-				if USEPROXY {
+				if *proxy != "" {
 					// Skip TLS verification if -insecure flag is present
 					c.WithTransport(&http.Transport{
 						Proxy:           http.ProxyURL(proxyURL),
@@ -227,7 +226,7 @@ func main() {
 				})
 			}
 
-			if USEPROXY {
+			if *proxy != "" {
 				// Skip TLS verification if -insecure flag is present
 				c.WithTransport(&http.Transport{
 					Proxy:           http.ProxyURL(proxyURL),
@@ -251,6 +250,7 @@ func main() {
 		close(results)
 	}()
 
+	// listen to results channel and write to stdout
 	w := bufio.NewWriter(os.Stdout)
 	defer w.Flush()
 	if *unique {
@@ -266,6 +266,9 @@ func main() {
 
 }
 
+// takes a form struct and returns a byte array of form inputs
+// if its a POST form it returns POST data
+// if its a GET form it returns a URL
 func generateFormData(f form, hash string) []byte {
 	formData := url.Values{}
 	for i := 0; i < len(f.Inputs); i++ {
@@ -358,8 +361,9 @@ func isUnique(url string) bool {
 	return true
 }
 
+// returns a random alphabetical string of provided length
 func randomString(length int) string {
-	charset := "abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	charset := "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	b := make([]byte, length)
 	for i := range b {
 		b[i] = charset[seededRand.Intn(len(charset))]
