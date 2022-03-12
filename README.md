@@ -23,18 +23,27 @@ Usage of ./reflector:
   -u	Show only unique urls
 ```
 
-# Example output:
+# Example:
 ```
-[href] https://garlic0x1.com/home?page=2
-[form] https://garlic0x1.com/uploadfile
-[form] https://garlic0x1.com/login
-[form] https://garlic0x1.com/signup
-[href] https://www.idontplaydarts.com/2012/06/encoding-web-shells-in-png-idat-chunks/
-[href] https://github.com/garlic0x1/find_and_bypass_403
-[href] https://medium.com/@insecurity_92477/utilizing-htaccess-for-exploitation-purposes-part-1-5733dd7fc8eb
-[href] https://github.com/vavkamil/xss2png
-[reflector] Injection from https://garlic0x1.com/signup found at https://garlic0x1.com/
-[href] https://garlic0x1.com/logout
-[href] https://garlic0x1.com/account
-[reflector] Injection from https://garlic0x1.com/signup found at https://garlic0x1.com/login
+$ echo https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/ | ./reflector -u -s -d 3 -proxy http://localhost:8080
+2022/03/11 21:32:24 Using proxy http://localhost:8080
+[href] https://portswigger.net/web-security/cross-site-scripting/reflected/lab-html-context-nothing-encoded
+[href] https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/
+[href] https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/post?postId=3
+[href] https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/post?postId=1
+[href] https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/post?postId=2
+[href] https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/post?postId=4
+[href] https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/post?postId=5
+[script] https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/resources/labheader/js/labHeader.js
+[form] https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/
+[form] https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/post/comment
+[reflector] Injection from https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/ found at https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/?search=http%3A%2F%2FdEzNuRML
+[reflector] Injection from https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/post/comment found at https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/post?postId=3
+[href] http://yudsqgcx/
+[href] http://nrufhnpa/
+[reflector] Injection from https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/ found at https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/?search=http%3A%2F%2FaOrGBFPq
+[reflector] Injection from https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/post/comment found at https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/post?postId=4
+[href] http://hxhuvayu/
+[reflector] Injection from https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/ found at https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/?search=http%3A%2F%2FvmdJFxaW
+
 ```
