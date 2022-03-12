@@ -2,6 +2,8 @@
 A crawler that tests HTML forms for reflection  
 Based on https://github.com/hakluke/hakrawler  
 
+For every HTML form found while crawling, all input fields will be submitted with a hash to try to fit the type (email, text, password, etc).  If those hashes appear a response you will be notified
+
 # Usage:
 ```
 $ ./reflector -h
