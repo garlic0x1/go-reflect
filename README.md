@@ -4,6 +4,8 @@ Based on https://github.com/hakluke/hakrawler
 
 For every HTML form found while crawling, all input fields will be submitted with a hash to try to fit the type (email, text, password, etc), and hidden fields will be set to their default value.  If those hashes appear a response you will be notified
 
+Using the `-proxy` flag will disable TLS verification and allow traffic to be viewed in an intercept proxy
+
 # Installation:
 ```
 go install github.com/garlic0x1/reflector@main
