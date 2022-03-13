@@ -6,11 +6,6 @@ For every HTML form found while crawling, all input fields will be submitted wit
 
 Using the `-proxy` flag will disable TLS verification and allow traffic to be viewed in an intercept proxy
 
-# Installation:
-```
-go install github.com/garlic0x1/reflector@main
-```
-
 # Usage:
 ```
 $ ./reflector -h
