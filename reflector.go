@@ -187,26 +187,28 @@ func main() {
 					FormLocation: action,
 				})
 
-				// set up proxy
-				if *proxy != "" {
-					// Skip TLS verification if -insecure flag is present
-					c.WithTransport(&http.Transport{
-						Proxy:           http.ProxyURL(proxyURL),
-						TLSClientConfig: &tls.Config{InsecureSkipVerify: *insecure},
-					})
-				} else {
-					c.WithTransport(&http.Transport{
-						TLSClientConfig: &tls.Config{InsecureSkipVerify: *insecure},
-					})
-				}
-				// add the custom headers
-				if headers != nil {
-					c.OnRequest(func(r *colly.Request) {
-						for header, value := range headers {
-							r.Headers.Set(header, value)
-						}
-					})
-				}
+				/*
+					// set up proxy
+					if *proxy != "" {
+						// Skip TLS verification if -insecure flag is present
+						c.WithTransport(&http.Transport{
+							Proxy:           http.ProxyURL(proxyURL),
+							TLSClientConfig: &tls.Config{InsecureSkipVerify: *insecure},
+						})
+					} else {
+						c.WithTransport(&http.Transport{
+							TLSClientConfig: &tls.Config{InsecureSkipVerify: *insecure},
+						})
+					}
+					// add the custom headers
+					if headers != nil {
+						c.OnRequest(func(r *colly.Request) {
+							for header, value := range headers {
+								r.Headers.Set(header, value)
+							}
+						})
+					}
+				*/
 
 				// send the form request
 				if method == "POST" || method == "post" {
@@ -280,9 +282,11 @@ func generateFormData(f form, hash string) []byte {
 			formData.Add(f.Inputs[i].Name, fmt.Sprintf("%s@gmail.com", hash))
 		} else if f.Inputs[i].Type == "text" {
 			//payload = payload + "&" + f.Inputs[i].Name + "=http://" + HASH
-			formData.Add(f.Inputs[i].Name, fmt.Sprintf("http://%s", hash))
+			formData.Add(f.Inputs[i].Name, hash)
 		} else if f.Inputs[i].Type == "password" {
 			//payload = payload + "&" + f.Inputs[i].Name + "=" + hash
+			formData.Add(f.Inputs[i].Name, hash)
+		} else {
 			formData.Add(f.Inputs[i].Name, hash)
 		}
 	}
