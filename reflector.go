@@ -187,29 +187,6 @@ func main() {
 					FormLocation: action,
 				})
 
-				/*
-					// set up proxy
-					if *proxy != "" {
-						// Skip TLS verification if -insecure flag is present
-						c.WithTransport(&http.Transport{
-							Proxy:           http.ProxyURL(proxyURL),
-							TLSClientConfig: &tls.Config{InsecureSkipVerify: *insecure},
-						})
-					} else {
-						c.WithTransport(&http.Transport{
-							TLSClientConfig: &tls.Config{InsecureSkipVerify: *insecure},
-						})
-					}
-					// add the custom headers
-					if headers != nil {
-						c.OnRequest(func(r *colly.Request) {
-							for header, value := range headers {
-								r.Headers.Set(header, value)
-							}
-						})
-					}
-				*/
-
 				// send the form request
 				if method == "POST" || method == "post" {
 					e.Request.PostRaw(action, generateFormData(f, hash))
