@@ -1,10 +1,10 @@
 FROM golang:1.17
 
 
-WORKDIR /go/src/chrome-crawler
+WORKDIR /go/src/go-reflect
 COPY . .
 
 RUN go get -d -v ./...
 RUN go install -v ./...
 
-ENTRYPOINT ["chrome-crawler"]
+ENTRYPOINT ["go-reflect"]
