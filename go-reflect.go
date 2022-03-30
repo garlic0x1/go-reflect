@@ -145,13 +145,11 @@ func main() {
 				link := e.Attr("href")
 				if strings.Contains(link, "?") {
 					for _, s := range fuzzParameter(link, *payloads) {
-						printResult(s, "fuzzer", *showSource, results, e)
 						e.Request.Visit(s)
 					}
-				} else {
-					printResult(link, "href", *showSource, results, e)
-					e.Request.Visit(link)
 				}
+				printResult(link, "href", *showSource, results, e)
+				e.Request.Visit(link)
 			})
 
 			// find and print all the JavaScript files
