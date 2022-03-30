@@ -10,12 +10,12 @@ Using the `-proxy` flag will disable TLS verification and allow traffic to be vi
 # Update:
 
 Now fuzzes discovered Get params based on a wordlist of templates  
-```[fuzzer] http://192.168.1.108:9999/home?q=%3Ca%20href=FdfflqnC%3E%3C/a%3E
-[fuzzer] http://192.168.1.108:9999/home?q=../gzjrPZhO
-[fuzzer] http://192.168.1.108:9999/home?q=....//IKgzBwni
-[form] http://192.168.1.108:9999/signup
-[reflector] Injection from /home?q=<a href=yRbzfiWf></a> found at http://192.168.1.108:9999/home?q=%3Ca%20href=yRbzfiWf%3E%3C/a%3E
-[href] http://192.168.1.108:9999/ouVKGoWcmpxUMvnUEVIruHGtfBmR
+Example Templates:
+```  
+{{.Path}}?{{.Key}}={{.Value}}
+{{.Path}}?{{.Key}}=<a href={{.Hash}}></a>
+{{.Path}}?{{.Key}}=../{{.Hash}}
+{{.Path}}?{{.Key}}=....//{{.Hash}}
 ```
 
 # Usage:
