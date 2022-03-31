@@ -59,7 +59,7 @@ func main() {
 	subsInScope := flag.Bool("subs", false, "Include subdomains for crawling.")
 	showSource := flag.Bool("s", false, "Show the source of URL based on where it was found (href, form, script, etc.)")
 	rawHeaders := flag.String(("h"), "", "Custom headers separated by two semi-colons. E.g. -h \"Cookie: foo=bar;;Referer: http://example.com/\" ")
-	payloads := flag.String(("w"), "payloads.txt", "Template wordlist for param fuzzing")
+	payloads := flag.String(("w"), "./payloads", "Template wordlist for param fuzzing")
 	proxy := flag.String(("proxy"), "", "Proxy URL, example: -proxy http://127.0.0.1:8080")
 	unique := flag.Bool(("u"), false, "Show only unique urls")
 
