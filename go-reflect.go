@@ -93,7 +93,7 @@ func main() {
 			url := s.Text()
 			hostname, err := extractHostname(url)
 			if err != nil {
-				log.Println("Error parsing URL:", err)
+				//log.Println("Error parsing URL:", err)
 				return
 			}
 
@@ -257,7 +257,7 @@ func fuzzParameter(u string, payloads string) []string {
 	// parse link to determine scope
 	parsed, err := url.Parse(u)
 	if err != nil {
-		log.Println("failed to parse url", u, err)
+		//log.Println("failed to parse url", u, err)
 		return []string{}
 	}
 	host := parsed.Host
