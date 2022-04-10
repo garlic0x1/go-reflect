@@ -13,9 +13,9 @@ You can pipe to https://github.com/garlic0x1/url-miner to find reflected GET par
 
 # Usage:
 ```
-$ ./reflector -h
+$ go-reflect -h
 flag needs an argument: -h
-Usage of ./reflector:
+Usage of go-reflect:
   -d int
     	Depth to crawl. (default 2)
   -h string
@@ -34,8 +34,7 @@ Usage of ./reflector:
 
 # Example:
 ```
-$ echo https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/ | ./reflector -u -s -d 3 -proxy http://localhost:8080
-2022/03/11 21:32:24 Using proxy http://localhost:8080
+$ echo https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/ | go-reflect -u -s -d 3
 [href] https://portswigger.net/web-security/cross-site-scripting/reflected/lab-html-context-nothing-encoded
 [href] https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/
 [href] https://ac7f1f701f2c6ea2c19f078f00eb00a7.web-security-academy.net/post?postId=3
