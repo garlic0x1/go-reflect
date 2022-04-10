@@ -7,6 +7,10 @@ For every HTML form found while crawling, all input fields will be submitted wit
 
 Using the `-proxy` flag will disable TLS verification and allow traffic to be viewed in an intercept proxy
 
+# Note:
+Earlier I added a feature to fuzz params, I didn't like it so I commented it out  
+You can pipe to https://github.com/garlic0x1/url-miner to find reflected GET params  
+
 # Usage:
 ```
 $ ./reflector -h
