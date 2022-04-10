@@ -4,7 +4,6 @@ package main
 
 import (
 	"bufio"
-	"bytes"
 	"crypto/tls"
 	"errors"
 	"flag"
@@ -18,7 +17,6 @@ import (
 	"regexp"
 	"strings"
 	"sync"
-	"text/template"
 	"time"
 
 	"github.com/gocolly/colly/v2"
@@ -59,7 +57,7 @@ func main() {
 	subsInScope := flag.Bool("subs", false, "Include subdomains for crawling.")
 	showSource := flag.Bool("s", false, "Show the source of URL based on where it was found (href, form, script, etc.)")
 	rawHeaders := flag.String(("h"), "", "Custom headers separated by two semi-colons. E.g. -h \"Cookie: foo=bar;;Referer: http://example.com/\" ")
-	payloads := flag.String(("w"), "./payloads", "Template wordlist for param fuzzing")
+	//payloads := flag.String(("w"), "./payloads", "Template wordlist for param fuzzing")
 	proxy := flag.String(("proxy"), "", "Proxy URL, example: -proxy http://127.0.0.1:8080")
 	unique := flag.Bool(("u"), false, "Show only unique urls")
 
@@ -143,11 +141,13 @@ func main() {
 			// Print every href found, and visit it
 			c.OnHTML("a[href]", func(e *colly.HTMLElement) {
 				link := e.Attr("href")
-				if strings.Contains(link, "?") {
-					for _, s := range fuzzParameter(link, *payloads) {
-						e.Request.Visit(s)
+				/*
+					if strings.Contains(link, "?") {
+						for _, s := range fuzzParameter(link, *payloads) {
+							e.Request.Visit(s)
+						}
 					}
-				}
+				*/
 				printResult(link, "href", *showSource, results, e)
 				e.Request.Visit(link)
 			})
@@ -253,6 +253,8 @@ func main() {
 
 }
 
+// idk about this feature.. probably better left to garlic0x1/url-miner
+/*
 func fuzzParameter(u string, payloads string) []string {
 	// parse link to determine scope
 	parsed, err := url.Parse(u)
@@ -313,6 +315,7 @@ func fuzzParameter(u string, payloads string) []string {
 
 	return ret
 }
+*/
 
 // takes a form struct and returns a byte array of form inputs
 // if its a POST form it returns POST data
