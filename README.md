@@ -7,17 +7,6 @@ For every HTML form found while crawling, all input fields will be submitted wit
 
 Using the `-proxy` flag will disable TLS verification and allow traffic to be viewed in an intercept proxy
 
-# Update:
-
-Now fuzzes discovered Get params based on a wordlist of templates  
-Example Templates:
-```  
-{{.Path}}?{{.Key}}={{.Value}}
-{{.Path}}?{{.Key}}=<a href={{.Hash}}></a>
-{{.Path}}?{{.Key}}=../{{.Hash}}
-{{.Path}}?{{.Key}}=....//{{.Hash}}
-```
-
 # Usage:
 ```
 $ ./reflector -h
