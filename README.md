@@ -1,11 +1,23 @@
 # go-reflect
-Renamed due to there being a Burp plugin named "reflector"  
 A crawler that tests HTML forms for reflection  
 Based on https://github.com/hakluke/hakrawler  
 
 For every HTML form found while crawling, all input fields will be submitted with a hash to try to fit the type (email, text, password, etc), and hidden fields will be set to their default value.  If those hashes appear in a response you will be notified
 
 Using the `-proxy` flag will disable TLS verification and allow traffic to be viewed in an intercept proxy
+
+# Installation:
+Go install
+```
+go install github.com/garlic0x1/go-reflect@main
+```
+Docker install
+```
+git clone https://github.com/garlic0x1/go-reflect
+cd go-reflect
+sudo docker build -t "garlic0x1/go-reflect" .
+echo https://www.example.com | docker run --rm -i garlic0x1/go-reflect -u -s
+```
 
 # Note:
 Earlier I added a feature to fuzz params, I didn't like it so I commented it out  
