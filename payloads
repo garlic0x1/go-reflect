@@ -1,3 +1,0 @@
-{{.Path}}?{{.Key}}=<a href={{.Hash}}></a>
-{{.Path}}?{{.Key}}=../{{.Hash}}
-{{.Path}}?{{.Key}}=....//{{.Hash}}
